@@ -1,0 +1,39 @@
+﻿
+@model CRUDASPCoreWebAPI.Models.UserModel
+
+<div class="content">
+    <!-- BEGIN LOGIN FORM -->
+
+    <form class="pt-3" method="post" asp-controller="Login" asp-action="Login">
+        <h3 class="form-title font-green">Sign In</h3>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="text-danger">@Html.Raw(TempData["Error"]) </div>
+        }
+
+
+        <div class="form-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">UserName</label>
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" asp-for="Username" placeholder="Enter Username" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">Password</label>
+            <input class="form-control form-control-solid placeholder-no-fix" type="password" asp-for="Password" placeholder="Enter Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Login</button>
+        </div>
+    </form>
+    <!-- END LOGIN FORM -->
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
